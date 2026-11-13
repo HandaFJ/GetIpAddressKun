@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "vue": "npm:vue@3.3.4/dist/vue.esm-browser.js",
+    "leaflet": "npm:leaflet@1.9.4/dist/leaflet-src.esm.js"
+  },
+  "tasks": {
+    "start": "deno run --allow-net --allow-read main.ts"
+  }
+}

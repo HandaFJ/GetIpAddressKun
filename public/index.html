@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IPアドレス位置情報取得くん</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- 自作CSS -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>IPアドレス位置情報取得くん</h2>
+
+        <div class="search-box">
+            <input v-model="ipInput" placeholder="例: 8.8.8.8 （空欄で自身のIP）" @keyup.enter="fetchIpLocation(ipInput)" />
+            <button @click="fetchIpLocation(ipInput)">検索</button>
+        </div>
+        <p>入力されたIPアドレス（またはあなたのアクセス元）をもとに、おおよその位置情報を地図上に表示します。<br>
+            ※IPアドレスから取得できる位置情報は、GPSのような詳細な個人住所ではなく、プロバイダやデータセンターなどが所在する大まかな地域・都市が表示されます。</p>
+
+        <div v-if="errorMsg" class="error">{{ errorMsg }}</div>
+
+        <div v-if="ipData" class="info-panel">
+            <p><strong>IPアドレス:</strong> {{ ipData.ip }}</p>
+            <p><strong>ロケーション:</strong> {{ ipData.country_name }} / {{ ipData.region }} / {{ ipData.city }}</p>
+            <p><strong>ISP / 組織:</strong> {{ ipData.org }}</p>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <!-- 自作JS -->
+    <script src="/app.js"></script>
+</body>
+
+</html>
